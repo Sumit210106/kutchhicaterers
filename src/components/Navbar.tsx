@@ -16,10 +16,10 @@ export default function Navbar() {
   //     : "text-white/80 font-medium text-[17px] px-4 py-2.5 hover:bg-white/5 rounded-xl transition-colors";
 
   return (
-    <nav className="absolute top-0 w-full z-50 p-4 md:p-6 lg:p-8 flex justify-between items-center pointer-events-none">
+    <nav className="absolute w-full z-50 p-4 md:p-6 lg:p-8 flex justify-between items-center pointer-events-none">
       
       {/* Brand Logo / Text */}
-      <div className="flex-1 flex justify-start pointer-events-auto">
+      <div className="flex-1 flex justify-start pointer-events-auto p-3 md:p-0">
         <Link to="/" className="flex items-center justify-center bg-white border border-white/10 rounded-4xl px-4 py-1.5 transition-colors">
           <img src="/logo.png" alt="Kutchhi Caterers Logo" className="h-15 md:h-20 w-auto object-contain" />
         </Link>
