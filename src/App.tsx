@@ -45,8 +45,8 @@ function App() {
         {/* WITH NAVBAR + FOOTER */}
         <Route element={<Layout />}>
           <Route path="/" element={<Home />} />
-          <Route path="/about" element={<About />} />
-          <Route path="/services" element={<Services />} />
+          <Route path="/" element={<About />} />
+          <Route path="/" element={<Services />} />
         </Route>
 
         {/* WITHOUT NAVBAR + FOOTER */}
