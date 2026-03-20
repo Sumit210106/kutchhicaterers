@@ -1,5 +1,5 @@
 import OurStory from "../components/OurStory";
-import AboutPhilosophy from "../components/AboutPhilosophy";
+// import AboutPhilosophy from "../components/AboutPhilosophy";
 import AboutVideo from "../components/AboutVideo";
 import ContactForm from "../components/ContactForm";
 
