@@ -1,7 +1,3 @@
-
-import Navbar from "./Navbar";
-
-
 export default function Hero() {
   return (
     <div className="bg-gray-50 min-h-screen p-3 w-full flex flex-col items-center">
@@ -15,7 +11,6 @@ export default function Hero() {
         />
         <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-black/30 z-0 pointer-events-none" />
 
-        <Navbar />
 
         {/* Center Main Text */}
         <div className="flex-1 flex flex-col items-center justify-center z-10 px-4 mt-8 md:mt-[-4rem] pointer-events-none w-full">

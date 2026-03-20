@@ -1,15 +1,15 @@
-import React from "react";
+
 import { Send, MapPin, Phone, Clock } from "lucide-react";
 
 export default function ContactForm() {
   return (
     <section className="bg-gray-50 w-full px-3 sm:px-4 md:px-5 lg:px-6 pb-16 md:pb-24 flex flex-col items-center">
-      <div className="w-full max-w-[1920px] rounded-[2.5rem] md:rounded-[3.5rem] overflow-hidden bg-white border border-black/5 p-4 md:p-8 lg:p-12 flex flex-col gap-10">
+      <div className="w-full max-w-[1920px] rounded-4xl overflow-hidden bg-white border border-black/5 p-4 md:p-8 lg:p-12 flex flex-col gap-10">
         
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 md:gap-8">
           
           {/* Left Side: Image / Value Prop */}
-          <div className="relative rounded-[2rem] md:rounded-[3rem] overflow-hidden bg-black p-8 md:p-12 flex flex-col justify-end min-h-[400px] lg:min-h-[600px] border border-black/10">
+          <div className="relative rounded-4xl overflow-hidden bg-black p-8 md:p-12 flex flex-col justify-end min-h-[400px] lg:min-h-[600px] border border-black/10">
             <div 
               className="absolute inset-0 bg-cover bg-center opacity-70"
               style={{ backgroundImage: 'url("https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?auto=format&fit=crop&w=1200&q=80")' }}
@@ -30,7 +30,7 @@ export default function ContactForm() {
           </div>
 
           {/* Right Side: Form Bento */}
-          <div className="bg-gray-50 rounded-[2rem] md:rounded-[3rem] p-6 md:p-10 lg:p-14 flex flex-col gap-8 justify-center border border-black/5">
+          <div className="bg-gray-50 rounded-4xl p-6 md:p-10 lg:p-14 flex flex-col gap-8 justify-center border border-black/5">
             <h3 className="text-gray-950 font-bold text-[2rem] md:text-[3rem] tracking-tight leading-none">
               Get Free Quote
             </h3>
@@ -73,7 +73,7 @@ export default function ContactForm() {
               </div>
 
               <button className="mt-4 bg-gray-950 hover:bg-gray-800 text-white px-8 py-5 rounded-full flex items-center justify-center gap-3 transition-colors shadow-xl group">
-                <span className="font-bold text-[18px] md:text-[20px] tracking-tight">Send Request</span>
+                <span className="font-semibold text-[18px] md:text-[20px] tracking-tight">Send Request</span>
                 <Send className="group-hover:translate-x-1 transition-transform" size={20} />
               </button>
             </div>

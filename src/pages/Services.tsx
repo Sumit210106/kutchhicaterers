@@ -1,6 +1,4 @@
 import { ArrowRight, Star } from "lucide-react";
-import Navbar from "../components/Navbar";
-import Footer from "../components/Footer";
 
 const services = [
   { 
@@ -47,10 +45,10 @@ const services = [
 
 export default function Services() {
   return (
-    <div className="bg-gray-50 flex flex-col min-h-screen">
+    <div className="bg-gray-50 flex flex-col min-h-screen p-3">
       
       {/* Services Sub-Hero */}
-      <div className="w-full px-3 sm:px-4 md:px-5 lg:px-6 pt-3 md:pt-4 flex flex-col items-center">
+      <div className="w-full flex flex-col items-center">
         <div className="relative w-full max-w-[1920px] rounded-[2.5rem] md:rounded-[3.5rem] overflow-hidden bg-black flex flex-col items-center pt-32 pb-24 md:pt-48 md:pb-32">
           
           <div 
@@ -59,7 +57,6 @@ export default function Services() {
           />
           <div className="absolute inset-0 bg-gradient-to-t from-black via-black/50 to-transparent z-0 pointer-events-none" />
 
-          <Navbar />
 
           <div className="relative z-10 flex flex-col items-center px-6 text-center">
             <h4 className="text-[#e58a43] font-bold tracking-widest uppercase text-sm mb-4 flex items-center justify-center gap-2">
@@ -115,7 +112,7 @@ export default function Services() {
         </div>
       </section>
 
-      <Footer />
+
     </div>
   );
 }

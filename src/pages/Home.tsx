@@ -5,7 +5,7 @@ import PopularDishes2 from "../components/PopularDishes2"
 // import OurStory from "../components/OurStory"
 import SocialMedia from "../components/SocialMedia"
 import ContactForm from "../components/ContactForm"
-import Footer from "../components/Footer"
+
 
 function Home() {
   return (
@@ -17,7 +17,6 @@ function Home() {
       <SocialMedia />
       {/* <OurStory /> */}
       <ContactForm />
-      <Footer />
     </div>
   )
 }

@@ -34,7 +34,7 @@ export default function PopularDishes() {
           {dishes.map((dish, i) => (
             <div 
               key={i} 
-              className="relative flex-1 rounded-4xl overflow-hidden group hover:flex-[3] lg:hover:flex-[4] transition-[flex] duration-700 ease-out cursor-pointer bg-gray-900 border border-white/10"
+              className="relative flex-1 rounded-4xl overflow-hidden group hover:flex-3 lg:hover:flex-4 transition-[flex] duration-700 ease-out cursor-pointer bg-gray-900 border border-white/10"
             >
               {/* Image Background */}
               <div 

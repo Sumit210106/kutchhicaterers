@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 
 export default function Footer() {
   return (
-    <footer className="w-full bg-gray-50 p-3 sm:p-4 md:p-5 lg:p-6 pb-0 flex flex-col items-center">
+    <footer className="w-full bg-gray-50 p-3 mb-20 md:mb-0 flex flex-col items-center">
       
       {/* Massive Dark Rounded Container */}
       <div className="relative w-full max-w-[1920px] rounded-4xl overflow-hidden bg-black flex flex-col justify-end min-h-[550px] md:min-h-[700px] ">
