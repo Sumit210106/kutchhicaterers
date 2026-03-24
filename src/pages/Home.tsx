@@ -2,7 +2,6 @@ import Hero from "../components/Hero"
 import FeaturedServices from "../components/FeaturedServices"
 import PopularDishes from "../components/PopularDishes"
 import PopularDishes2 from "../components/PopularDishes2"
-// import OurStory from "../components/OurStory"
 import SocialMedia from "../components/SocialMedia"
 import ContactForm from "../components/ContactForm"
 
@@ -12,10 +11,14 @@ function Home() {
     <div className="bg-gray-50 flex flex-col min-h-screen">
       <Hero/>
       <FeaturedServices />
-      <PopularDishes />
-      <PopularDishes2 />
+      <div className="block md:hidden">
+
+        <PopularDishes />
+      </div>
+      <div className="hidden md:block">
+          <PopularDishes2 />
+      </div>
       <SocialMedia />
-      {/* <OurStory /> */}
       <ContactForm />
     </div>
   )

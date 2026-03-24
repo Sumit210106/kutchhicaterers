@@ -110,3 +110,34 @@ export const allMenuData: Record<string, { pageTitle: string, description: strin
     ]
   }
 };
+
+export const servicesData = [
+  {
+    title: "Wedding Services",
+    description: "Make your special day truly memorable with our comprehensive wedding catering. We go places others wouldn't to ensure your feast is perfect.",
+    image: "https://images.unsplash.com/photo-1519225421980-715cb0215aed?auto=format&fit=crop&q=80",
+    link: "/services",
+    gridSpan: "md:col-span-8"
+  },
+  {
+    title: "Corporate",
+    description: "Elevate your corporate events with premium catering designed to impress clients and colleagues.",
+    image: "https://images.unsplash.com/photo-1555244162-803834f70033?auto=format&fit=crop&q=80",
+    link: "/services",
+    gridSpan: "md:col-span-4"
+  },
+  {
+    title: "Cocktail",
+    description: "Exquisite drinks and bite-sized delicacies linking fun and taste perfectly.",
+    image: "https://images.unsplash.com/photo-1414235077428-338989a2e8c0?auto=format&fit=crop&q=80",
+    link: "/services",
+    gridSpan: "md:col-span-4"
+  },
+  {
+    title: "Buffet Catering",
+    description: "A grand spread of authentic Indian delicacies, offering a diverse and rich culinary experience for all your guests.",
+    image: "https://images.unsplash.com/photo-1530103862676-de889243da87?auto=format&fit=crop&q=80",
+    link: "/services",
+    gridSpan: "md:col-span-8"
+  }
+];
