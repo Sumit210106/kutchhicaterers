@@ -7,10 +7,11 @@ export default function About() {
   return (
     <div className="bg-gray-50 flex flex-col min-h-screen">
       {/* SubHero for About Page */}
+      <section>
       <div className="bg-gray-50 p-3 w-full flex flex-col items-center">
         <div className="relative w-full max-w-[1920px] rounded-4xl overflow-hidden bg-black shadow-2xl flex flex-col pb-16">
           <div 
-            className="absolute inset-0 z-0 bg-cover bg-center opacity-70 mix-blend-luminosity"
+            className="absolute inset-0 z-0 bg-cover bg-center opacity-70"
             style={{ backgroundImage: 'url("https://images.unsplash.com/photo-1511795409834-ef04bbd61622?auto=format&fit=crop&w=2000&q=80")' }}
           />
           <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/40 to-black/30 z-0 pointer-events-none" />
@@ -25,6 +26,7 @@ export default function About() {
           </div>
         </div>
       </div>
+      </section>
 
       <OurStory />
       {/* <AboutPhilosophy /> */}

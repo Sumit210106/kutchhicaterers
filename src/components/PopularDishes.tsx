@@ -1,15 +1,9 @@
 import { ArrowRight } from 'lucide-react';
-
-const dishes = [
-  { name: 'Veg Thali', img: 'https://images.unsplash.com/photo-1546833999-b9f581a1996d?auto=format&fit=crop&w=600&q=80' },
-  { name: 'Pizza', img: 'https://images.unsplash.com/photo-1513104890138-7c749659a591?auto=format&fit=crop&w=600&q=80' },
-  { name: 'Soup', img: 'https://images.unsplash.com/photo-1547592180-85f173990554?auto=format&fit=crop&w=600&q=80' },
-  { name: 'Juice', img: 'https://images.unsplash.com/photo-1600271886742-f049cd451b62?auto=format&fit=crop&w=600&q=80' },
-  { name: 'Italian', img: 'https://images.unsplash.com/photo-1551183053-bf91a1d81141?auto=format&fit=crop&w=600&q=80' },
-  { name: 'Salad', img: 'https://images.unsplash.com/photo-1512621776951-a57141f2eefd?auto=format&fit=crop&w=600&q=80' }
-];
+import { Link, useNavigate } from 'react-router-dom';
+import { popularDishesData } from '../data';
 
 export default function PopularDishes() {
+  const navigate = useNavigate();
   return (
     <section className="bg-gray-50 w-full px-3 sm:px-4 md:px-5 lg:px-6 pb-16 md:pb-24 flex flex-col items-center">
       <div className="w-full max-w-[1920px] rounded-4xl overflow-hidden bg-black p-8 md:p-12 lg:p-16 flex flex-col gap-10">
@@ -22,15 +16,19 @@ export default function PopularDishes() {
               popular dishes
             </h2>
           </div>
-          <button className="bg-white text-gray-950 px-[24px] py-[14px] md:px-[36px] md:py-[18px] rounded-full flex items-center justify-center border border-transparent hover:bg-gray-200 transition-colors pointer-events-auto">
+          <Link to="/menu" className="bg-white text-gray-950 px-[24px] py-[14px] md:px-[36px] md:py-[18px] rounded-full flex items-center justify-center border border-transparent hover:bg-gray-200 transition-colors pointer-events-auto">
             <span className="font-semibold text-[16px] md:text-[18px] tracking-[-0.01em] leading-none">View Full Menu</span>
-          </button>
+          </Link>
         </div>
 
         {/* Horizontal Scroll Grid */}
-        <div className="flex overflow-x-auto gap-4 md:gap-6 pb-8 snap-x snap-mandatory pt-4 scrollbar-hide">
-          {dishes.map((dish, i) => (
-            <div key={i} className="relative w-[260px] md:w-[340px] h-[360px] md:h-[480px] shrink-0 snap-center rounded-4xl overflow-hidden group cursor-pointer bg-gray-900 border border-white/10">
+        <div className="flex overflow-x-auto gap-4 md:gap-6 pb-8 snap-x snap-mandatory pt-4">
+          {popularDishesData.map((dish, i) => (
+            <div 
+              key={i} 
+              onClick={() => navigate('/menu/' + dish.name.toLowerCase().replace(' ', '-'))}
+              className="relative w-[260px] md:w-[340px] h-[360px] md:h-[480px] shrink-0 snap-center rounded-4xl overflow-hidden group cursor-pointer bg-gray-900 border border-white/10"
+            >
               <div 
                 className="absolute inset-0 bg-cover bg-center transition-transform duration-700 group-hover:scale-105 opacity-80 group-hover:opacity-100"
                 style={{ backgroundImage: `url(${dish.img})` }}

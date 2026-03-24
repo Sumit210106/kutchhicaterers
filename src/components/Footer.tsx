@@ -65,53 +65,51 @@ export default function Footer() {
             <Link to="/" className="text-[#e58a43] hover:text-[#d67b38] transition-colors">Homepage</Link>
             <Link to="/about" className="text-white hover:text-[#e58a43] transition-colors">About Us</Link>
             <Link to="/services" className="text-white hover:text-[#e58a43] transition-colors">Services</Link>
+            <Link to="/contact" className="text-white hover:text-[#e58a43] transition-colors">Contact Us</Link>
           </div>
         </div>
 
         {/* Bottom Left Cutout Tab for Copyright */}
-       {/* Bottom Left Cutout Tab - REFINED */}
-<div className="absolute bottom-0 left-0 z-30">
-  
-  <div className="relative bg-gray-50 rounded-tr-[32px] pt-[14px] pr-[14px]">
-    
-    {/* Top Curve */}
-    <svg 
-      className="absolute bottom-full left-0 w-[28px] h-[28px] text-gray-50"
-      viewBox="0 0 32 32"
-      fill="currentColor"
-    >
-      <path d="M0 32V0C0 17.673 14.327 32 32 32H0Z" />
-    </svg>
+        <div className="absolute bottom-0 left-0 z-30">
+          <div className="relative bg-gray-50 rounded-tr-[32px] pt-[14px] pr-[14px]">
+            {/* Top Curve */}
+            <svg 
+              className="absolute bottom-full left-0 w-[28px] h-[28px] text-gray-50"
+              viewBox="0 0 32 32"
+              fill="currentColor"
+            >
+              <path d="M0 32V0C0 17.673 14.327 32 32 32H0Z" />
+            </svg>
 
-    {/* Right Curve */}
-    <svg 
-      className="absolute bottom-0 left-full w-[28px] h-[28px] text-gray-50"
-      viewBox="0 0 32 32"
-      fill="currentColor"
-    >
-      <path d="M0 32V0C0 17.673 14.327 32 32 32H0Z" />
-    </svg>
+            {/* Right Curve */}
+            <svg 
+              className="absolute bottom-0 left-full w-[28px] h-[28px] text-gray-50"
+              viewBox="0 0 32 32"
+              fill="currentColor"
+            >
+              <path d="M0 32V0C0 17.673 14.327 32 32 32H0Z" />
+            </svg>
 
-    {/* BUTTON */}
-    <div className="
-      bg-white text-gray-900
-      px-[22px] py-[12px] md:px-[28px] md:py-[14px]
-      rounded-full 
-      rounded-bl-4xl
-      border border-black/15
-      hover:bg-gray-100 transition
-      flex items-center justify-center
-    ">
-      <span className="font-medium text-[12.5px] md:text-[14.5px] tracking-[-0.02em]">
-        Copyright © 2026 Kutchhi Caterers
-      </span>
-    </div>
+            {/* BUTTON */}
+            <div className="bg-white text-gray-900 px-[22px] py-[12px] md:px-[28px] md:py-[14px] rounded-full rounded-bl-4xl border border-black/15 hover:bg-gray-100 transition flex items-center justify-center">
+              <span className="font-medium text-[12.5px] md:text-[14.5px] tracking-[-0.02em]">
+                Copyright © 2026 Kutchhi Caterers
+              </span>
+            </div>
+          </div>
+        </div>
+      </div>
 
-  </div>
-</div>
-
-
-
+      {/* Cultural Banner: Atithi Devo Bhava */}
+      <div className="w-full flex justify-center py-12 md:py-16">
+        <div className="flex flex-col items-center gap-4 text-center px-6">
+          <div className="flex items-center gap-3">
+            <div className="h-[1px] w-8 md:w-12 bg-[#7A1A1A]/30"></div>
+            <span className="text-[#7A1A1A] font-serif italic text-2xl md:text-3xl lg:text-4xl tracking-tight">Atithi Devo Bhava</span>
+            <div className="h-[1px] w-8 md:w-12 bg-[#7A1A1A]/30"></div>
+          </div>
+          <p className="text-gray-400 font-medium text-xs md:text-sm tracking-[0.3em] uppercase ml-1">The Guest is God</p>
+        </div>
       </div>
     </footer>
   );

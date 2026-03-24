@@ -18,7 +18,7 @@ export default function Hero() {
             Enjoy the taste of
           </h2>
 
-          <h1 className="text-white font-black text-[3.75rem] sm:text-[6rem] md:text-[9rem] lg:text-[12rem] leading-[0.85] tracking-[-0.05em] mb-4 md:mb-6 pointer-events-auto selection:bg-white/20">
+          <h1 className="text-white font-black text-[3.75rem] sm:text-[6rem] md:text-[10rem]  leading-[0.85] tracking-[-0.05em] mb-4 md:mb-6 pointer-events-auto selection:bg-white/20">
             kutchhi
             <br className="md:hidden" />
             <span>{" "}</span>caterers

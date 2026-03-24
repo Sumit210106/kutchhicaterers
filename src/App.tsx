@@ -4,27 +4,25 @@ import { lazy, Suspense } from "react";
 import Navbar from "./components/Navbar";
 import Footer from "./components/Footer";
 import MobileNav from "./components/MobileNav";
+import LoaderSkeleton from "./components/LoaderSkeleton";
 
-/* ========================= */
-/* ✅ LAZY IMPORTS */
-/* ========================= */
+
 const Home = lazy(() => import("./pages/Home"));
 const About = lazy(() => import("./pages/About"));
 const Services = lazy(() => import("./pages/Services"));
+const Contact = lazy(() => import("./pages/Contact"));
 const NotFound = lazy(() => import("./pages/NotFound"));
 
-/* ========================= */
-/* ✅ INLINE LAYOUT */
-/* ========================= */
+const Menu = lazy(() => import("./pages/Menu"));
+const InstagramFeed = lazy(() => import("./pages/InstagramFeed"));
+
 function Layout() {
   return (
     <>
       <Navbar />
 
       <div className="min-h-screen bg-gray-50 flex flex-col font-sans">
-        <Suspense fallback={<div className="text-center py-20">Loading...</div>}>
-          <Outlet />
-        </Suspense>
+        <Outlet />
 
         <MobileNav />
       </div>
@@ -34,26 +32,31 @@ function Layout() {
   );
 }
 
-/* ========================= */
-/* ✅ APP */
-/* ========================= */
 function App() {
   return (
     <Router>
       <Routes>
 
         {/* WITH NAVBAR + FOOTER */}
-        <Route element={<Layout />}>
+        <Route element={
+          <Suspense fallback={<LoaderSkeleton />}>
+            <Layout />
+          </Suspense>
+        }>
           <Route path="/" element={<Home />} />
-          <Route path="/" element={<About />} />
-          <Route path="/" element={<Services />} />
+          <Route path="/about" element={<About />} />
+          <Route path="/services" element={<Services />} />
+          <Route path="/contact" element={<Contact />} />
+          <Route path="/menu" element={<Menu />} />
+          <Route path="/menu/:category" element={<Menu />} />
+          <Route path="/instagram" element={<InstagramFeed />} />
         </Route>
 
         {/* WITHOUT NAVBAR + FOOTER */}
         <Route
           path="*"
           element={
-            <Suspense fallback={<div className="text-center py-20">Loading...</div>}>
+            <Suspense fallback={<LoaderSkeleton />}>
               <NotFound />
             </Suspense>
           }

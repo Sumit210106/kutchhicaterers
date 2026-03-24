@@ -1,15 +1,9 @@
 import { ArrowRight, Star } from 'lucide-react';
+import { Link, useNavigate } from 'react-router-dom';
+import { popularDishesData } from '../data';
 
-const dishes = [
-  { name: 'Veg Thali', desc: 'An endless royal feast of authentic Indian flavors', img: 'https://images.unsplash.com/photo-1546833999-b9f581a1996d?auto=format&fit=crop&w=1200&q=80', featured: true },
-  { name: 'Pizza', desc: 'Wood-fired perfection with rich melted mozzarella', img: 'https://images.unsplash.com/photo-1513104890138-7c749659a591?auto=format&fit=crop&w=1200&q=80' },
-  { name: 'Soup', desc: 'Warm, comforting, and exquisitely seasoned broths', img: 'https://images.unsplash.com/photo-1547592180-85f173990554?auto=format&fit=crop&w=1200&q=80' },
-  { name: 'Fresh Juice', desc: 'Pure refreshing blends of handpicked seasonal fruits', img: 'https://images.unsplash.com/photo-1600271886742-f049cd451b62?auto=format&fit=crop&w=1200&q=80' },
-  { name: 'Italian', desc: 'Handcrafted pasta and signature coastal sauces', img: 'https://images.unsplash.com/photo-1551183053-bf91a1d81141?auto=format&fit=crop&w=1200&q=80' },
-  { name: 'Salad', desc: 'Crisp organic greens tossed in vibrant vinaigrettes', img: 'https://images.unsplash.com/photo-1512621776951-a57141f2eefd?auto=format&fit=crop&w=1200&q=80' }
-];
-
-export default function PopularDishes() {
+export default function PopularDishes2() {
+  const navigate = useNavigate();
   return (
     <section className="bg-gray-50 w-full px-3 sm:px-4 md:px-5 lg:px-6 pb-16 md:pb-24 flex flex-col items-center">
       <div className="w-full max-w-[1920px] rounded-4xl overflow-hidden bg-black p-6 md:p-12 lg:p-16 flex flex-col gap-10 shadow-2xl">
@@ -24,16 +18,17 @@ export default function PopularDishes() {
               popular dishes
             </h2>
           </div>
-          <button className="bg-white text-gray-950 px-[24px] py-[14px] md:px-[36px] md:py-[18px] rounded-full flex items-center justify-center border border-transparent hover:bg-gray-200 transition-colors pointer-events-auto shadow-lg">
+          <Link to="/menu" className="bg-white text-gray-950 px-[24px] py-[14px] md:px-[36px] md:py-[18px] rounded-full flex items-center justify-center border border-transparent hover:bg-gray-200 transition-colors pointer-events-auto shadow-lg">
             <span className="font-semibold text-[16px] md:text-[18px] tracking-[-0.01em] leading-none">View Full Menu</span>
-          </button>
+          </Link>
         </div>
 
         {/* Premium Expanding Accordion Grid */}
         <div className="flex flex-col md:flex-row h-[800px] md:h-[600px] lg:h-[700px] gap-3 md:gap-4 w-full">
-          {dishes.map((dish, i) => (
+          {popularDishesData.map((dish, i) => (
             <div 
               key={i} 
+              onClick={() => navigate('/menu/' + dish.name.toLowerCase().replace(' ', '-'))}
               className="relative flex-1 rounded-4xl overflow-hidden group hover:flex-3 lg:hover:flex-4 transition-[flex] duration-700 ease-out cursor-pointer bg-gray-900 border border-white/10"
             >
               {/* Image Background */}

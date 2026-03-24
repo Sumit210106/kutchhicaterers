@@ -1,6 +1,7 @@
 // import { useState } from 'react';
 // import { Menu, X } from 'lucide-react';
 import { NavLink, Link } from 'react-router-dom';
+import { Instagram } from 'lucide-react';
 
 export default function Navbar() {
   // const [isOpen, setIsOpen] = useState(false);
@@ -36,13 +37,19 @@ export default function Navbar() {
         <NavLink to="/services" className={navLinkClass}>
           Services
         </NavLink>
+        <NavLink to="/instagram" className={navLinkClass}>
+          <div className="flex items-center gap-2">
+            <Instagram size={18} />
+            <span>Feed</span>
+          </div>
+        </NavLink>
       </div>
 
       {/* Desktop Right CTA */}
       <div className="hidden md:flex flex-1 justify-end items-center gap-3 pointer-events-auto">
-        <a href="/contact" className="border border-white/20 text-[#f4f4f4] px-6 py-[10px] rounded-[2rem] text-[15px] font-medium hover:bg-white/10 hover:border-white/40 transition-all whitespace-nowrap bg-black/10 backdrop-blur-md hover:bg-[#7A1A1A] hover:border-transparent">
+        <Link to="/contact" className="border border-white/20 text-[#f4f4f4] px-6 py-[10px] rounded-[2rem] text-[15px] font-medium hover:bg-white/10 hover:border-white/40 transition-all whitespace-nowrap bg-black/10 backdrop-blur-md hover:bg-[#7A1A1A] hover:border-transparent">
           Contact Us
-        </a>
+        </Link>
       </div>
 
       {/* Mobile Toggle */}
