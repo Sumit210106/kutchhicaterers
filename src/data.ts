@@ -113,31 +113,43 @@ export const allMenuData: Record<string, { pageTitle: string, description: strin
 
 export const servicesData = [
   {
+    id: "wedding",
     title: "Wedding Services",
     description: "Make your special day truly memorable with our comprehensive wedding catering. We go places others wouldn't to ensure your feast is perfect.",
+    fullDescription: "Your wedding day is a once-in-a-lifetime event, and we believe the food should reflect that. From traditional Gujarati feasts to contemporary fusion cuisines, we provide a tailored catering experience that will leave your guests in awe.",
     image: "https://images.unsplash.com/photo-1519225421980-715cb0215aed?auto=format&fit=crop&q=80",
-    link: "/services",
-    gridSpan: "md:col-span-8"
+    link: "/services/wedding",
+    gridSpan: "md:col-span-8",
+    features: ["Custom Menu Design", "Live Counter Experience", "Full Service Staff", "Exquisite Table Settings"]
   },
   {
+    id: "corporate",
     title: "Corporate",
     description: "Elevate your corporate events with premium catering designed to impress clients and colleagues.",
+    fullDescription: "Whether it's a high-stakes board meeting, a product launch, or a company-wide celebration, our corporate catering services deliver professionalism and flavor in equal measure.",
     image: "https://images.unsplash.com/photo-1555244162-803834f70033?auto=format&fit=crop&q=80",
-    link: "/services",
-    gridSpan: "md:col-span-4"
+    link: "/services/corporate",
+    gridSpan: "md:col-span-4",
+    features: ["Breakfast & Lunch Boxes", "Themed Coffee Breaks", "Executive Dining", "Gala Dinner Setup"]
   },
   {
+    id: "cocktail",
     title: "Cocktail",
     description: "Exquisite drinks and bite-sized delicacies linking fun and taste perfectly.",
+    fullDescription: "Our cocktail catering focuses on small bites with big flavors. Perfectly paired with a curated selection of mocktails and beverages, we create a social atmosphere that flows beautifully.",
     image: "https://images.unsplash.com/photo-1414235077428-338989a2e8c0?auto=format&fit=crop&q=80",
-    link: "/services",
-    gridSpan: "md:col-span-4"
+    link: "/services/cocktail",
+    gridSpan: "md:col-span-4",
+    features: ["Signature Mocktails", "Global Hors d'oeuvres", "Roaming Service", "Stylish Bar Setup"]
   },
   {
+    id: "buffet",
     title: "Buffet Catering",
     description: "A grand spread of authentic Indian delicacies, offering a diverse and rich culinary experience for all your guests.",
+    fullDescription: "Our buffet catering is a grand celebration of Indian culinary heritage. We offer a wide variety of dishes, from regional specialties to popular favorites, all served with the warmth and hospitality Kutchhi Caterers is known for.",
     image: "https://images.unsplash.com/photo-1530103862676-de889243da87?auto=format&fit=crop&q=80",
-    link: "/services",
-    gridSpan: "md:col-span-8"
+    link: "/services/buffet",
+    gridSpan: "md:col-span-8",
+    features: ["Authentic Gujarati Thali", "Multi-Cuisine Options", "Elegant Buffet Setup", "Hygiene & Safety Focused"]
   }
 ];

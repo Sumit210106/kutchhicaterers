@@ -1,0 +1,371 @@
+import { useParams, Link } from "react-router-dom";
+import { servicesData } from "../data";
+import { ArrowLeft, ArrowRight, Phone, Sparkles, Shield, Clock, Users } from "lucide-react";
+import { motion, useScroll, useTransform } from "framer-motion";
+import { useEffect, useRef } from "react";
+
+/* ────── per-service extra content ────── */
+const serviceContent: Record<string, {
+  tagline: string;
+  stats: { value: string; label: string }[];
+  process: { step: string; title: string; desc: string }[];
+  gallery: string[];
+}> = {
+  wedding: {
+    tagline: "Where every dish tells your love story",
+    stats: [
+      { value: "500+", label: "Weddings Catered" },
+      { value: "50k+", label: "Happy Guests" },
+      { value: "200+", label: "Menu Options" },
+      { value: "25+", label: "Years Experience" },
+    ],
+    process: [
+      { step: "01", title: "Consultation", desc: "We sit with you to understand your vision, dietary needs, cultural preferences and the ambiance you desire for your special day." },
+      { step: "02", title: "Menu Curation", desc: "Our master chefs craft a bespoke multi-course menu tailored to your palate — from traditional Gujarati thalis to contemporary fusion." },
+      { step: "03", title: "Tasting Session", desc: "Experience your custom menu at our kitchen before the big day. Fine–tune every spice level, presentation, and portion size." },
+      { step: "04", title: "Flawless Execution", desc: "On your day, our team arrives hours early. Live counters, elegant buffet setups, and impeccable service from start to end." },
+    ],
+    gallery: [
+      "https://images.unsplash.com/photo-1519225421980-715cb0215aed?auto=format&fit=crop&w=800&q=80",
+      "https://images.unsplash.com/photo-1530103862676-de889243da87?auto=format&fit=crop&w=800&q=80",
+      "https://images.unsplash.com/photo-1555244162-803834f70033?auto=format&fit=crop&w=800&q=80",
+    ],
+  },
+  corporate: {
+    tagline: "Elevate every boardroom and banquet",
+    stats: [
+      { value: "300+", label: "Corporate Events" },
+      { value: "100+", label: "Partner Companies" },
+      { value: "150+", label: "Menu Options" },
+      { value: "25+", label: "Years Experience" },
+    ],
+    process: [
+      { step: "01", title: "Brief & Budget", desc: "We align with your event manager to understand the scale, dietary restrictions, and corporate branding requirements." },
+      { step: "02", title: "Menu Design", desc: "From elegant breakfast boxes to multi-course gala dinners, we design a menu that matches your corporate identity." },
+      { step: "03", title: "Logistics Planning", desc: "Our operations team maps out delivery, setup, and staffing with military precision for seamless execution." },
+      { step: "04", title: "Day-of Excellence", desc: "Professional uniformed staff, branded setups, and impeccable timing — your event runs without a hitch." },
+    ],
+    gallery: [
+      "https://images.unsplash.com/photo-1555244162-803834f70033?auto=format&fit=crop&w=800&q=80",
+      "https://images.unsplash.com/photo-1414235077428-338989a2e8c0?auto=format&fit=crop&w=800&q=80",
+      "https://images.unsplash.com/photo-1530103862676-de889243da87?auto=format&fit=crop&w=800&q=80",
+    ],
+  },
+  cocktail: {
+    tagline: "Small bites, unforgettable impressions",
+    stats: [
+      { value: "200+", label: "Cocktail Evenings" },
+      { value: "80+", label: "Signature Recipes" },
+      { value: "30+", label: "Mocktail Options" },
+      { value: "25+", label: "Years Experience" },
+    ],
+    process: [
+      { step: "01", title: "Theme Selection", desc: "Choose from elegant soirée, tropical vibes, or minimalist chic — we tailor the entire experience to your theme." },
+      { step: "02", title: "Bite-Size Perfection", desc: "Our chefs create global hors d'oeuvres — from truffle arancini to paneer tikka skewers — each a work of art." },
+      { step: "03", title: "Bar Setup", desc: "A stylish mocktail bar with signature concoctions, complete with professional bartenders and curated glassware." },
+      { step: "04", title: "Roaming Service", desc: "Elegantly uniformed servers circulate your event, ensuring every guest is attended to with warmth and style." },
+    ],
+    gallery: [
+      "https://images.unsplash.com/photo-1414235077428-338989a2e8c0?auto=format&fit=crop&w=800&q=80",
+      "https://images.unsplash.com/photo-1519225421980-715cb0215aed?auto=format&fit=crop&w=800&q=80",
+      "https://images.unsplash.com/photo-1546833999-b9f581a1996d?auto=format&fit=crop&w=800&q=80",
+    ],
+  },
+  buffet: {
+    tagline: "A grand celebration on every platter",
+    stats: [
+      { value: "1000+", label: "Buffets Served" },
+      { value: "1M+", label: "Meals Served" },
+      { value: "250+", label: "Dish Varieties" },
+      { value: "25+", label: "Years Experience" },
+    ],
+    process: [
+      { step: "01", title: "Cuisine Selection", desc: "Pick from authentic Gujarati, Rajasthani, Punjabi, South Indian, Chinese, Continental and many more regional specialties." },
+      { step: "02", title: "Scale Planning", desc: "Whether 50 guests or 5,000 — we plan quantities, stations, and service flow for a perfect dining rhythm." },
+      { step: "03", title: "Setup & Décor", desc: "Elegant chafing dishes, live counters, themed table décor — we transform your venue into a culinary paradise." },
+      { step: "04", title: "Grand Service", desc: "Our trained service staff ensures hot food stays hot, stations stay restocked, and every guest leaves fully satisfied." },
+    ],
+    gallery: [
+      "https://images.unsplash.com/photo-1530103862676-de889243da87?auto=format&fit=crop&w=800&q=80",
+      "https://images.unsplash.com/photo-1546833999-b9f581a1996d?auto=format&fit=crop&w=800&q=80",
+      "https://images.unsplash.com/photo-1555244162-803834f70033?auto=format&fit=crop&w=800&q=80",
+    ],
+  },
+};
+
+/* ────── small reusable icon map ────── */
+const iconMap = [Sparkles, Shield, Clock, Users];
+
+export default function ServiceDetail() {
+  const { id } = useParams();
+  const service = servicesData.find(s => s.id === id);
+  const extra = serviceContent[id || ""] || serviceContent.wedding;
+
+  const parallaxRef = useRef<HTMLDivElement>(null);
+  const { scrollYProgress } = useScroll({ target: parallaxRef, offset: ["start start", "end start"] });
+  const heroY = useTransform(scrollYProgress, [0, 1], ["0%", "30%"]);
+  const heroOpacity = useTransform(scrollYProgress, [0, 0.6], [0.65, 0.2]);
+
+  useEffect(() => { window.scrollTo(0, 0); }, [id]);
+
+  if (!service) {
+    return (
+      <div className="min-h-screen flex items-center justify-center bg-gray-50 px-4">
+        <div className="text-center">
+          <h2 className="text-4xl font-black text-gray-900 mb-4">Service Not Found</h2>
+          <Link to="/services" className="text-[#e58a43] font-bold flex items-center gap-2 justify-center">
+            <ArrowLeft size={20} /> Back to Services
+          </Link>
+        </div>
+      </div>
+    );
+  }
+
+  return (
+    <div className="bg-gray-50 flex flex-col min-h-screen font-sans">
+
+      {/* ════════════════════════════════════════
+           1. PARALLAX HERO (Home Hero DNA)
+         ════════════════════════════════════════ */}
+      <section ref={parallaxRef} className="p-3 w-full">
+        <div className="relative w-full rounded-4xl overflow-hidden bg-black flex flex-col min-h-[85vh] md:min-h-[90vh]">
+          <motion.div
+            style={{ y: heroY, opacity: heroOpacity }}
+            className="absolute inset-0 z-0 bg-cover bg-center bg-no-repeat will-change-transform"
+            initial={{ scale: 1.15 }}
+            animate={{ scale: 1 }}
+            transition={{ duration: 1.4, ease: "easeOut" }}
+            aria-hidden
+          >
+            <div className="absolute inset-0 bg-cover bg-center" style={{ backgroundImage: `url("${service.image}")` }} />
+          </motion.div>
+          <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-black/30 z-0 pointer-events-none" />
+
+          {/* Center text */}
+          <div className="flex-1 flex flex-col items-center justify-center z-10 px-4 mt-8 md:mt-[-4rem] pointer-events-none w-full">
+            <motion.p initial={{ opacity: 0, y: 12 }} animate={{ opacity: 0.7, y: 0 }} transition={{ delay: 0.15 }} className="text-[#e58a43] text-[13px] md:text-[15px] font-bold uppercase tracking-[0.25em] mb-3">
+              Premium Catering
+            </motion.p>
+            <motion.h1
+              initial={{ opacity: 0, scale: 0.9 }}
+              animate={{ opacity: 1, scale: 1 }}
+              transition={{ duration: 0.9, delay: 0.3 }}
+              className="text-white font-black text-[3.75rem] sm:text-[6rem] md:text-[10rem] leading-[0.85] tracking-[-0.05em] mb-4 md:mb-6 text-center selection:bg-white/20"
+            >
+              {service.title.split(' ').map((w, i) => (
+                <span key={i}>{w}{i === 0 ? <br className="md:hidden" /> : ''}{' '}</span>
+              ))}
+            </motion.h1>
+            <motion.p initial={{ opacity: 0 }} animate={{ opacity: 0.8 }} transition={{ delay: 0.55 }} className="text-[#ebebeb] text-[13px] md:text-[15px] max-w-[280px] md:max-w-[480px] text-center font-medium leading-[1.6]">
+              {extra.tagline}
+            </motion.p>
+          </div>
+
+          {/* Glass card – bottom left */}
+          <div className="absolute bottom-[90px] left-5 md:bottom-8 md:left-8 flex gap-2.5 md:gap-4 items-end z-20">
+            <motion.div initial={{ opacity: 0, x: -20 }} animate={{ opacity: 1, x: 0 }} transition={{ delay: 0.9 }} className="bg-[#ffffff]/5 backdrop-blur-[24px] border border-white/10 rounded-[1.5rem] md:rounded-[2rem] p-4 md:p-6 w-[160px] md:w-[240px]">
+              <h3 className="text-white font-medium tracking-[-0.04em] text-[1.75rem] md:text-[2.5rem] mb-1.5 leading-none">
+                25<span className="text-[1.25rem] md:text-[1.75rem]">+Yrs</span>
+              </h3>
+              <p className="text-white/70 text-[11px] md:text-[13.5px] font-medium leading-[1.5]">
+                "Pure Indian" is exactly where we want to be. All in the name of authentic cuisine.
+              </p>
+            </motion.div>
+          </div>
+
+          {/* SVG cutout – bottom right */}
+          <div className="absolute bottom-0 right-0 z-30">
+            <div className="relative bg-gray-50 rounded-tl-[28px] md:rounded-tl-[34px] pt-[12px] pl-[12px] md:pt-[16px] md:pl-[16px]">
+              <svg className="absolute bottom-full right-0 w-[20px] h-[20px] md:w-[28px] md:h-[28px] text-gray-50 pointer-events-none" viewBox="0 0 32 32" fill="currentColor"><path d="M32 32V0C32 17.673 17.673 32 0 32H32Z" /></svg>
+              <svg className="absolute bottom-0 right-full w-[20px] h-[20px] md:w-[28px] md:h-[28px] text-gray-50 pointer-events-none" viewBox="0 0 32 32" fill="currentColor"><path d="M32 32V0C32 17.673 17.673 32 0 32H32Z" /></svg>
+              <Link to="/contact" className="bg-white text-gray-900 px-[24px] py-[12px] md:px-[80px] md:py-[17px] rounded-full rounded-br-4xl border border-black/15 hover:bg-gray-100 transition-all pointer-events-auto block">
+                <span className="font-medium text-[15px] md:text-[19px] tracking-[-0.02em] leading-none">Book Now</span>
+              </Link>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* ════════════════════════════════════════
+           2. ANIMATED STATS MARQUEE (Aceternity style)
+         ════════════════════════════════════════ */}
+      <section className="w-full px-3 py-6">
+        <div className="max-w-[1920px] mx-auto grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-5">
+          {extra.stats.map((stat, idx) => (
+            <motion.div
+              key={idx}
+              initial={{ opacity: 0, y: 40 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.5, delay: idx * 0.1 }}
+              className="relative rounded-[2rem] md:rounded-4xl overflow-hidden bg-white border border-gray-100 p-8 md:p-10 group hover:bg-gray-950 hover:border-gray-900 transition-colors duration-500 cursor-default"
+            >
+              <h3 className="text-gray-950 group-hover:text-white font-black text-[2.5rem] md:text-[3.5rem] tracking-[-0.04em] leading-none mb-2 transition-colors duration-500">
+                {stat.value}
+              </h3>
+              <p className="text-gray-500 group-hover:text-white/60 text-[13px] md:text-[15px] font-medium transition-colors duration-500">
+                {stat.label}
+              </p>
+              {/* Corner accent */}
+              <div className="absolute top-4 right-4 w-3 h-3 rounded-full bg-[#e58a43] opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+            </motion.div>
+          ))}
+        </div>
+      </section>
+
+      {/* ════════════════════════════════════════
+           3. ABOUT / DESCRIPTION SECTION
+         ════════════════════════════════════════ */}
+      <section className="w-full px-3 py-10 md:py-16">
+        <div className="max-w-[1920px] mx-auto flex flex-col-reverse md:flex-row justify-between items-start md:items-end gap-8 px-2 md:px-0">
+          <motion.div initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} className="flex flex-col gap-5 max-w-[580px]">
+            <p className="text-gray-600 text-[16px] md:text-[19px] font-medium leading-[1.7]">
+              {service.fullDescription}
+            </p>
+            <p className="text-gray-500 text-[14px] md:text-[16px] font-medium leading-[1.7]">
+              {service.description}
+            </p>
+            <Link to="/services" className="text-[#e58a43] hover:text-[#d67b38] font-bold flex items-center gap-2 group transition-colors mt-2">
+              <ArrowLeft size={18} strokeWidth={2.5} className="group-hover:-translate-x-1 transition-transform" /> All Services
+            </Link>
+          </motion.div>
+          <motion.h2 initial={{ opacity: 0, x: 30 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }} className="text-gray-950 font-black text-[3.2rem] sm:text-[5rem] md:text-[7.5rem] leading-[0.8] tracking-[-0.05em] text-left md:text-right">
+            About<br />This
+          </motion.h2>
+        </div>
+      </section>
+
+      {/* ════════════════════════════════════════
+           4. FEATURES — DARK BENTO CARDS
+         ════════════════════════════════════════ */}
+      <section className="w-full px-3 pb-10 md:pb-16">
+        <div className="max-w-[1920px] mx-auto flex flex-col gap-10 md:gap-16">
+          <div className="flex flex-col-reverse md:flex-row justify-between items-start md:items-end gap-8 px-2 md:px-0">
+            <div className="flex flex-col gap-4 max-w-[400px]">
+              <p className="text-gray-600 text-[15px] md:text-[17px] font-medium leading-[1.6]">
+                Every detail is designed to exceed your expectations, from ingredient sourcing to final plating.
+              </p>
+            </div>
+            <h2 className="text-gray-950 font-black text-[3.2rem] sm:text-[5rem] md:text-[7.5rem] leading-[0.8] tracking-[-0.05em] text-left md:text-right">
+              What's<br />Included
+            </h2>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-5">
+            {service.features?.map((feature, idx) => {
+              const Icon = iconMap[idx % iconMap.length];
+              return (
+                <motion.div
+                  key={idx}
+                  initial={{ opacity: 0, y: 40 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ duration: 0.5, delay: idx * 0.12 }}
+                  className="relative rounded-[2.5rem] md:rounded-4xl overflow-hidden bg-black group h-[280px] md:h-[320px] flex flex-col justify-end p-6 md:p-8 hover:scale-[1.02] transition-transform duration-500 cursor-default"
+                >
+                  <div className="absolute inset-0 bg-gradient-to-br from-gray-900 via-black to-gray-950" />
+                  <div className="absolute top-6 right-6 text-white/[0.03] text-[9rem] font-black leading-none pointer-events-none select-none">
+                    {(idx + 1).toString().padStart(2, '0')}
+                  </div>
+                  {/* Glow on hover */}
+                  <div className="absolute inset-0 bg-[#e58a43]/0 group-hover:bg-[#e58a43]/5 transition-colors duration-700 rounded-4xl" />
+
+                  <div className="relative z-10">
+                    <div className="w-12 h-12 rounded-full bg-[#e58a43] flex items-center justify-center text-white mb-6 group-hover:scale-110 group-hover:shadow-[0_0_30px_rgba(229,138,67,0.3)] transition-all duration-500">
+                      <Icon size={22} />
+                    </div>
+                    <h3 className="text-white font-bold text-[1.5rem] md:text-[1.8rem] tracking-tight leading-tight">
+                      {feature}
+                    </h3>
+                  </div>
+                </motion.div>
+              );
+            })}
+          </div>
+        </div>
+      </section>
+
+      {/* ════════════════════════════════════════
+           5. PROCESS — STAGGERED TIMELINE (Aceternity style)
+         ════════════════════════════════════════ */}
+      <section className="w-full px-3 py-10 md:py-20">
+        <div className="max-w-[1920px] mx-auto">
+          <div className="flex flex-col-reverse md:flex-row justify-between items-start md:items-end gap-8 px-2 md:px-0 mb-12 md:mb-20">
+            <div className="flex flex-col gap-4 max-w-[400px]">
+              <p className="text-gray-600 text-[15px] md:text-[17px] font-medium leading-[1.6]">
+                Our proven four-step approach ensures every event we cater is nothing short of extraordinary.
+              </p>
+            </div>
+            <h2 className="text-gray-950 font-black text-[3.2rem] sm:text-[5rem] md:text-[7.5rem] leading-[0.8] tracking-[-0.05em] text-left md:text-right">
+              Our<br />Process
+            </h2>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
+            {extra.process.map((p, idx) => (
+              <motion.div
+                key={idx}
+                initial={{ opacity: 0, y: 50 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, margin: "-80px" }}
+                transition={{ duration: 0.6, delay: idx * 0.12 }}
+                className="relative rounded-[2.5rem] md:rounded-4xl overflow-hidden bg-white border border-gray-100 p-8 md:p-12 group hover:border-gray-200 hover:shadow-[0_8px_40px_rgba(0,0,0,0.04)] transition-all duration-500"
+              >
+                {/* Step number watermark */}
+                <div className="absolute -top-4 -right-2 text-gray-100 text-[10rem] md:text-[14rem] font-black leading-none pointer-events-none select-none group-hover:text-gray-50 transition-colors duration-500">
+                  {p.step}
+                </div>
+
+                <div className="relative z-10">
+                  <div className="flex items-center gap-4 mb-6">
+                    <div className="w-10 h-10 rounded-full bg-[#e58a43] text-white flex items-center justify-center font-black text-sm">
+                      {p.step}
+                    </div>
+                    <div className="h-[1px] flex-1 bg-gray-200 group-hover:bg-[#e58a43]/30 transition-colors duration-500" />
+                  </div>
+                  <h3 className="text-gray-950 font-black text-[1.8rem] md:text-[2.5rem] tracking-tight leading-[0.95] mb-4">
+                    {p.title}
+                  </h3>
+                  <p className="text-gray-500 text-[14px] md:text-[16px] font-medium leading-[1.7] max-w-md">
+                    {p.desc}
+                  </p>
+                </div>
+              </motion.div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* ════════════════════════════════════════
+           6. CTA BANNER (Dark rounded-4xl card)
+         ════════════════════════════════════════ */}
+      <section className="w-full px-3 pb-6">
+        <div className="relative w-full rounded-4xl overflow-hidden bg-black">
+          <div className="absolute inset-0 bg-gradient-to-br from-gray-900 via-black to-gray-950" />
+          {/* Subtle radial glow */}
+          <div className="absolute inset-0 opacity-20 pointer-events-none" style={{ background: 'radial-gradient(circle at 30% 50%, #e58a43 0%, transparent 60%)' }} />
+
+          <div className="relative z-10 px-8 md:px-16 py-16 md:py-24 flex flex-col md:flex-row items-start md:items-center justify-between gap-10">
+            <div className="max-w-xl">
+              <motion.h2 initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} className="text-white font-black text-[2.5rem] md:text-[4rem] leading-[0.85] tracking-[-0.04em] mb-4">
+                Let's make your<br />event unforgettable
+              </motion.h2>
+              <p className="text-white/60 text-[14px] md:text-[16px] font-medium leading-[1.6] max-w-sm">
+                Get in touch with our experts to curate a menu that fits your vision perfectly.
+              </p>
+            </div>
+            <div className="flex flex-col sm:flex-row gap-4">
+              <Link to="/contact" className="bg-white text-gray-900 px-10 py-4 rounded-full font-medium text-[16px] md:text-[18px] tracking-[-0.02em] hover:bg-gray-100 transition-all flex items-center gap-2 group whitespace-nowrap">
+                Contact Us <ArrowRight size={20} className="group-hover:translate-x-1 transition-transform" />
+              </Link>
+              <a href="tel:+911234567890" className="border border-white/20 text-white px-10 py-4 rounded-full font-medium text-[16px] md:text-[18px] tracking-[-0.02em] hover:bg-white/10 transition-all flex items-center gap-2 whitespace-nowrap">
+                <Phone size={18} /> Call Us
+              </a>
+            </div>
+          </div>
+        </div>
+      </section>
+
+    </div>
+  );
+}

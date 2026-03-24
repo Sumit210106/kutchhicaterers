@@ -2,6 +2,7 @@ import { ArrowRight } from "lucide-react";
 import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
 import { servicesData } from "../data";
+import { useEffect, useRef, useState } from "react";
 
 interface ServiceCardProps {
   title: string;
@@ -43,6 +44,56 @@ const ServiceCard = ({ title, description, image, link, gridSpan, isDesktop }: S
 };
 
 export default function FeaturedServices() {
+  const [activeSlide, setActiveSlide] = useState(0);
+  const carouselRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    const carousel = carouselRef.current;
+    if (!carousel || window.innerWidth >= 768) return;
+
+    let isPaused = false;
+    const interval = setInterval(() => {
+      if (!isPaused) {
+        const cards = carousel.querySelectorAll('.service-card-wrapper');
+        if (cards.length === 0) return;
+        
+        const cardWidth = (cards[0] as HTMLElement).offsetWidth + 24;
+        const maxScroll = carousel.scrollWidth - carousel.clientWidth;
+
+        if (carousel.scrollLeft >= maxScroll - 5) {
+          carousel.scrollTo({ left: 0, behavior: 'smooth' });
+        } else {
+          carousel.scrollBy({ left: cardWidth, behavior: 'smooth' });
+        }
+      }
+    }, 4000);
+
+    const handleScroll = () => {
+      if (!carousel) return;
+      const cards = carousel.querySelectorAll('.service-card-wrapper');
+      if (cards.length === 0) return;
+      const cardWidth = (cards[0] as HTMLElement).offsetWidth + 24;
+      const newActiveSlide = Math.round(carousel.scrollLeft / cardWidth);
+      setActiveSlide(newActiveSlide);
+    };
+
+    const handleTouchStart = () => { isPaused = true; };
+    const handleTouchEnd = () => { 
+      setTimeout(() => { isPaused = false; }, 2000); 
+    };
+
+    carousel.addEventListener('scroll', handleScroll);
+    carousel.addEventListener('touchstart', handleTouchStart);
+    carousel.addEventListener('touchend', handleTouchEnd);
+
+    return () => {
+      clearInterval(interval);
+      carousel.removeEventListener('scroll', handleScroll);
+      carousel.removeEventListener('touchstart', handleTouchStart);
+      carousel.removeEventListener('touchend', handleTouchEnd);
+    };
+  }, []);
+
   return (
     <section className="bg-gray-50 w-full px-0 md:px-6 lg:px-8 py-16 md:py-24 overflow-hidden relative">
       <div className="max-w-[1920px] mx-auto flex flex-col gap-10 md:gap-16 lg:gap-20">
@@ -69,27 +120,41 @@ export default function FeaturedServices() {
           ))}
         </div>
 
-        {/* Unique Mobile Carousel - perspective scroll effect */}
-        <div 
-          className="md:hidden flex overflow-x-auto gap-6 px-6 pb-14 snap-x snap-mandatory no-scrollbar scroll-smooth"
-          style={{ scrollbarWidth: 'none' }}
-        >
-          {servicesData.map((service, index) => (
-            <motion.div
-              key={index}
-              initial={{ opacity: 0, scale: 0.9, rotate: index % 2 === 0 ? 2 : -2 }}
-              whileInView={{ 
-                opacity: 1, 
-                scale: 1, 
-                rotate: 0,
-                transition: { duration: 0.5, ease: "easeOut" }
-              }}
-              viewport={{ once: false, margin: "-10%" }}
-              className="snap-center shrink-0"
-            >
-              <ServiceCard {...service} isDesktop={false} />
-            </motion.div>
-          ))}
+        {/* Unique Mobile Carousel - perspective scroll effect with Autoplay */}
+        <div className="md:hidden relative group/carousel">
+          <div 
+            ref={carouselRef}
+            className="flex overflow-x-auto gap-6 px-6 pb-14 snap-x snap-mandatory no-scrollbar scroll-smooth"
+            style={{ scrollbarWidth: 'none' }}
+          >
+            {servicesData.map((service, index) => (
+              <motion.div
+                key={index}
+                initial={{ opacity: 0, scale: 0.9 }}
+                whileInView={{ 
+                  opacity: 1, 
+                   scale: 1, 
+                  transition: { duration: 0.5, ease: "easeOut" }
+                }}
+                viewport={{ once: false, margin: "-10%" }}
+                className="snap-center shrink-0 service-card-wrapper"
+              >
+                <ServiceCard {...service} isDesktop={false} />
+              </motion.div>
+            ))}
+          </div>
+          
+          {/* Indicators */}
+          <div className="flex justify-center gap-2 mt-[-20px]">
+            {servicesData.map((_, index) => (
+              <div 
+                key={index} 
+                className={`w-2 h-2 rounded-full transition-all duration-300 ${
+                  activeSlide === index ? 'bg-[#e58a43] w-4' : 'bg-gray-300'
+                }`}
+              />
+            ))}
+          </div>
         </div>
 
         {/* Subtle Instruction */}
