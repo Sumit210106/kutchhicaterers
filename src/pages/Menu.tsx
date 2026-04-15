@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { Star, ArrowRight, Sparkles, Download } from 'lucide-react';
+import { ArrowRight, Sparkles, Download } from 'lucide-react';
 import { useParams } from 'react-router-dom';
 import { allMenuData } from '../data';
 
