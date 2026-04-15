@@ -39,7 +39,7 @@ export default function Navbar() {
       </div>
 
       <div className="hidden md:flex flex-1 justify-end items-center gap-3 pointer-events-auto">
-        <Link to="/contact" className="border border-white/20 text-[#f4f4f4] px-6 py-[10px] rounded-[2rem] text-[15px] font-medium hover:bg-white/10 hover:border-white/40 transition-all whitespace-nowrap bg-black/10 backdrop-blur-md hover:bg-[#7A1A1A] hover:border-transparent">
+        <Link to="/contact" className="border border-white/20 text-[#f4f4f4] px-6 py-2.5 rounded-4xl text-[15px] font-medium hover:bg-white/10 hover:border-white/40 transition-all whitespace-nowrap bg-black/10 backdrop-blur-md">
           Contact Us
         </Link>
       </div>

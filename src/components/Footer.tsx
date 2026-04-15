@@ -6,7 +6,7 @@ export default function Footer() {
     <footer className="w-full bg-gray-50 p-3 mb-20 md:mb-0 flex flex-col items-center">
       
       {/* Massive Dark Rounded Container */}
-      <div className="relative w-full max-w-[1920px] rounded-4xl overflow-hidden bg-black flex flex-col justify-end min-h-[550px] md:min-h-[700px] ">
+      <div className="relative w-full max-w-480 rounded-4xl overflow-hidden bg-black flex flex-col justify-end min-h-137.5 md:min-h-175 ">
         
         {/* Background Overlay */}
         <div 
@@ -25,9 +25,9 @@ export default function Footer() {
             <input 
               type="email" 
               placeholder="email@kutchhicaterers.com" 
-              className="flex-1 bg-white text-gray-900 px-6 py-[18px] md:py-[20px] rounded-full outline-none font-medium text-[16px] md:text-[18px] placeholder:text-gray-400  focus:ring-4 focus:ring-white/20 transition-all border border-gray-100"
+              className="flex-1 bg-white text-gray-900 px-6 py-4.5 md:py-5 rounded-full outline-none font-medium text-[16px] md:text-[18px] placeholder:text-gray-400  focus:ring-4 focus:ring-white/20 transition-all border border-gray-100"
             />
-            <button className="bg-[#e58a43] hover:bg-[#d67129] text-white px-10 py-[18px] md:py-[20px] rounded-full font-bold text-[16px] md:text-[18px] transition-colors  whitespace-nowrap">
+            <button className="bg-[#e58a43] hover:bg-[#d67129] text-white px-10 py-4.5 md:py-5 rounded-full font-bold text-[16px] md:text-[18px] transition-colors  whitespace-nowrap">
               Sign Up
             </button>
           </div>
@@ -37,7 +37,7 @@ export default function Footer() {
         </div>
 
         {/* Bottom Half: Frosted Glass Panel */}
-        <div className="relative z-10 w-full bg-gradient-to-t from-black/90 via-black/80 to-transparent pt-32 pb-12 px-6 flex flex-col items-center justify-end">
+        <div className="relative z-10 w-full bg-linear-to-t from-black/90 via-black/80 to-transparent pt-32 pb-12 px-6 flex flex-col items-center justify-end">
           
           {/* Social Icons Row */}
           <div className="flex gap-4 mb-8">
@@ -69,10 +69,10 @@ export default function Footer() {
 
         {/* Bottom Left Cutout Tab for Copyright */}
         <div className="absolute bottom-0 left-0 z-30">
-          <div className="relative bg-gray-50 rounded-tr-[32px] pt-[14px] pr-[14px]">
+          <div className="relative bg-gray-50 rounded-tr-4xl pt-3.5 pr-3.5">
             {/* Top Curve */}
             <svg 
-              className="absolute bottom-full left-0 w-[28px] h-[28px] text-gray-50"
+              className="absolute bottom-full left-0 w-7 h-7 text-gray-50"
               viewBox="0 0 32 32"
               fill="currentColor"
             >
@@ -81,7 +81,7 @@ export default function Footer() {
 
             {/* Right Curve */}
             <svg 
-              className="absolute bottom-0 left-full w-[28px] h-[28px] text-gray-50"
+              className="absolute bottom-0 left-full w-7 h-7 text-gray-50"
               viewBox="0 0 32 32"
               fill="currentColor"
             >
@@ -89,7 +89,7 @@ export default function Footer() {
             </svg>
 
             {/* BUTTON */}
-            <div className="bg-white text-gray-900 px-[22px] py-[12px] md:px-[28px] md:py-[14px] rounded-full rounded-bl-4xl border border-black/15 hover:bg-gray-100 transition flex items-center justify-center">
+            <div className="bg-white text-gray-900 px-5.5 py-3 md:px-7 md:py-3.5 rounded-full rounded-bl-4xl border border-black/15 hover:bg-gray-100 transition flex items-center justify-center">
               <span className="font-medium text-[12.5px] md:text-[14.5px] tracking-[-0.02em]">
                 Copyright © 2026 Kutchhi Caterers
               </span>
@@ -102,9 +102,9 @@ export default function Footer() {
       <div className="w-full flex justify-center py-12 md:py-16">
         <div className="flex flex-col items-center gap-4 text-center px-6">
           <div className="flex items-center gap-3">
-            <div className="h-[1px] w-8 md:w-12 bg-[#7A1A1A]/30"></div>
+            <div className="h-px w-8 md:w-12 bg-[#7A1A1A]/30"></div>
             <span className="text-[#7A1A1A] font-serif italic text-2xl md:text-3xl lg:text-4xl tracking-tight">Atithi Devo Bhava</span>
-            <div className="h-[1px] w-8 md:w-12 bg-[#7A1A1A]/30"></div>
+            <div className="h-px w-8 md:w-12 bg-[#7A1A1A]/30"></div>
           </div>
           <p className="text-gray-400 font-medium text-xs md:text-sm tracking-[0.3em] uppercase ml-1">The Guest is God</p>
         </div>

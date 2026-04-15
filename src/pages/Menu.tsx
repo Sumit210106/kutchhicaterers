@@ -6,10 +6,22 @@ import { allMenuData } from '../data';
 import MenuBrochureForm from '../forms/MenuBrochureForm';
 import { motion } from 'framer-motion';
 
-const defaultData = {
+interface MenuItem {
+  title: string;
+  items: string[];
+  image?: string;
+}
+
+interface MenuData {
+  pageTitle: string;
+  description: string;
+  categories: MenuItem[];
+}
+
+const defaultData: MenuData = {
   pageTitle: 'Our Menu',
   description: 'A glimpse into our meticulously crafted multi-cuisine offerings. For the complete culinary experience, our full brochure is available for download.',
-  categories: (allMenuData as any)['veg-thali']?.categories || []
+  categories: ((allMenuData as Record<string, MenuData>)['veg-thali']?.categories) || []
 };
 
 export default function Menu() {
@@ -35,9 +47,9 @@ export default function Menu() {
 
   const mappedCategory = categoryMap[normalizedCategory];
 
-  const menuData =
-    (allMenuData as any)[mappedCategory || ''] ||
-    (allMenuData as any)['veg-thali'] ||
+  const menuData: MenuData =
+    ((allMenuData as Record<string, MenuData>)[mappedCategory || '']) ||
+    ((allMenuData as Record<string, MenuData>)['veg-thali']) ||
     defaultData;
 
   const { pageTitle, description, categories } = menuData;
@@ -65,9 +77,8 @@ export default function Menu() {
             className="absolute inset-0 z-0 bg-cover bg-center bg-no-repeat opacity-50"
             style={{ backgroundImage: 'url("https://images.unsplash.com/photo-1555244162-803834f70033?auto=format&fit=crop&w=2000&q=80")' }}
           />
-          <div className="absolute inset-0 bg-gradient-to-t from-black via-black/40 to-transparent z-0 pointer-events-none" />
+          <div className="absolute inset-0 bg-linear-to-t from-black via-black/40 to-transparent z-0 pointer-events-none" />
 
-          {/* Content */}
           <div className="flex-1 flex flex-col items-center justify-center z-10 px-4 mt-8 md:mt-0 pointer-events-none w-full text-center">
             <motion.div
               initial={{ opacity: 0, y: 16 }}
@@ -91,7 +102,7 @@ export default function Menu() {
               initial={{ opacity: 0 }}
               animate={{ opacity: 0.8 }}
               transition={{ duration: 0.7, delay: 0.3 }}
-              className="text-[#ebebeb] text-[14px] md:text-[17px] max-w-[300px] md:max-w-[600px] font-medium leading-[1.6]"
+              className="text-[#ebebeb] text-[14px] md:text-[17px] max-w-75 md:max-w-150 font-medium leading-[1.6]"
             >
               {description}
             </motion.p>
@@ -99,16 +110,16 @@ export default function Menu() {
 
           {/* Corner Call to Action (SVG Cutout Style) */}
           <div className="absolute bottom-0 right-0 z-30">
-            <div className="relative bg-gray-50 rounded-tl-[28px] md:rounded-tl-[34px] pt-[12px] pl-[12px] md:pt-[16px] md:pl-[16px]">
-              <svg className="absolute bottom-full right-0 w-[20px] h-[20px] md:w-[28px] md:h-[28px] text-gray-50 pointer-events-none" viewBox="0 0 32 32" fill="currentColor">
+            <div className="relative bg-gray-50 rounded-tl-[28px] md:rounded-tl-[34px] pt-3 pl-3 md:pt-4 md:pl-4">
+              <svg className="absolute bottom-full right-0 w-5 h-5 md:w-7 md:h-7 text-gray-50 pointer-events-none" viewBox="0 0 32 32" fill="currentColor">
                 <path d="M32 32V0C32 17.673 17.673 32 0 32H32Z" />
               </svg>
-              <svg className="absolute bottom-0 right-full w-[20px] h-[20px] md:w-[28px] md:h-[28px] text-gray-50 pointer-events-none" viewBox="0 0 32 32" fill="currentColor">
+              <svg className="absolute bottom-0 right-full w-5 h-5 md:w-7 md:h-7 text-gray-50 pointer-events-none" viewBox="0 0 32 32" fill="currentColor">
                 <path d="M32 32V0C32 17.673 17.673 32 0 32H32Z" />
               </svg>
               <button 
                 onClick={() => setIsModalOpen(true)}
-                className="bg-white text-gray-900 px-[24px] py-[14px] md:px-[60px] md:py-[18px] rounded-full rounded-br-4xl border border-black/15 hover:bg-gray-100 transition-all pointer-events-auto block"
+                className="bg-white text-gray-900 px-6 py-6 md:px-15 md:py-4.5 rounded-full rounded-br-4xl border border-black/15 hover:bg-gray-100 transition-all pointer-events-auto block"
               >
                 <span className="font-bold text-[15px] md:text-[18px] tracking-tight leading-none flex items-center gap-3">
                   Download Full Menu <Download size={20} className="text-[#e58a43]" />
@@ -123,8 +134,8 @@ export default function Menu() {
            2. MENU CATEGORIES (Bento Grid)
          ════════════════════════════════════════ */}
       <section className="w-full px-3 py-12 md:py-24">
-        <div className="max-w-[1920px] mx-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
-          {categories.map((cat, idx) => (
+        <div className="max-w-480 mx-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
+          {categories.map((cat: MenuItem, idx: number) => (
             <motion.div
               key={idx}
               initial={{ opacity: 0, y: 30 }}
@@ -135,9 +146,9 @@ export default function Menu() {
             >
               {/* Category Image Header */}
               {cat.image && (
-                <div className="w-full h-[180px] md:h-[240px] rounded-[1.5rem] md:rounded-[2rem] overflow-hidden bg-gray-100 relative shadow-sm">
+                <div className="w-full h-45 md:h-60 rounded-3xl md:rounded-4xl overflow-hidden bg-gray-100 relative shadow-sm">
                   <img src={cat.image} alt={cat.title} className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-1000" />
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity" />
+                  <div className="absolute inset-0 bg-linear-to-t from-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity" />
                 </div>
               )}
 
@@ -152,7 +163,7 @@ export default function Menu() {
                 </div>
 
                 <div className="grid grid-cols-1 gap-4">
-                  {cat.items.map((item, i) => {
+                  {cat.items.map((item: string, i: number) => {
                     const more = isMoreTrigger(item);
                     return (
                       <div key={i} className="flex items-center justify-between py-1 border-b border-gray-100/60 last:border-0 group/item">
@@ -190,13 +201,13 @@ export default function Menu() {
 
 
       <section className="w-full px-3 pb-12">
-        <div className="max-w-[1920px] mx-auto relative rounded-4xl overflow-hidden bg-black p-10 md:p-24 text-center">
+        <div className="max-w-480 mx-auto relative rounded-4xl overflow-hidden bg-black p-10 md:p-24 text-center">
            <img 
             src="https://images.unsplash.com/photo-1546833999-b9f581a1996d?auto=format&fit=crop&w=2000&q=80" 
             alt="Feast Background" 
             className="absolute inset-0 w-full h-full object-cover opacity-20 pointer-events-none"
           />
-          <div className="absolute inset-0 bg-gradient-to-t from-black via-transparent to-black/20 pointer-events-none" />
+          <div className="absolute inset-0 bg-linear-to-t from-black via-transparent to-black/20 pointer-events-none" />
 
           <div className="relative z-10 flex flex-col items-center gap-8">
             <h2 className="text-white text-[3.5rem] md:text-[6rem] font-black leading-[0.85] tracking-tight">
