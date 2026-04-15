@@ -1,4 +1,4 @@
-import { Home, Utensils, Info, PhoneCall, Instagram } from "lucide-react";
+import { Home, Utensils, Info, PhoneCall } from "lucide-react";
 import { Link, useLocation } from "react-router-dom";
 
 export default function MobileNav() {
@@ -9,7 +9,7 @@ export default function MobileNav() {
     { name: "Home", path: "/", icon: Home },
     { name: "About", path: "/about", icon: Info },
     { name: "Services", path: "/services", icon: Utensils },
-    { name: "Feed", path: "/instagram", icon: Instagram },
+    // { name: "Feed", path: "/instagram", icon: Instagram },
     { name: "Contact", path: "/contact", icon: PhoneCall },
   ];
 
@@ -42,9 +42,9 @@ export default function MobileNav() {
                   isActive ? "max-w-[100px] opacity-100 ml-2" : "max-w-0 opacity-0 ml-0"
                 }`}
               >
-                <span className="font-bold text-[14px] tracking-tight whitespace-nowrap">
+                {/* <span className="font-bold text-[14px] tracking-tight whitespace-nowrap">
                   {item.name}
-                </span>
+                </span> */}
               </div>
             </Link>
           );

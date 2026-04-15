@@ -15,7 +15,8 @@ const Contact = lazy(() => import("./pages/Contact"));
 const NotFound = lazy(() => import("./pages/NotFound"));
 
 const Menu = lazy(() => import("./pages/Menu"));
-const InstagramFeed = lazy(() => import("./pages/InstagramFeed"));
+
+// const InstagramFeed = lazy(() => import("./pages/InstagramFeed"));
 
 function Layout() {
   return (
@@ -51,7 +52,7 @@ function App() {
           <Route path="/contact" element={<Contact />} />
           <Route path="/menu" element={<Menu />} />
           <Route path="/menu/:category" element={<Menu />} />
-          <Route path="/instagram" element={<InstagramFeed />} />
+          {/* <Route path="/instagram" element={<InstagramFeed />} /> */}
         </Route>
 
         {/* WITHOUT NAVBAR + FOOTER */}

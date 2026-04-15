@@ -4,17 +4,17 @@ import { Send, MapPin, Phone, Clock } from "lucide-react";
 export default function ContactForm() {
   return (
     <section className="bg-gray-50 w-full px-3 sm:px-4 md:px-5 lg:px-6 pb-16 md:pb-24 flex flex-col items-center">
-      <div className="w-full max-w-[1920px] rounded-4xl overflow-hidden bg-white border border-black/5 p-4 md:p-8 lg:p-12 flex flex-col gap-10">
+      <div className="w-full max-w-480 rounded-4xl overflow-hidden bg-white border border-black/5 p-4 md:p-8 lg:p-12 flex flex-col gap-10">
         
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 md:gap-8">
           
           {/* Left Side: Image / Value Prop */}
-          <div className="relative rounded-4xl overflow-hidden bg-black p-8 md:p-12 flex flex-col justify-end min-h-[400px] lg:min-h-[600px] border border-black/10">
+          <div className="relative rounded-4xl overflow-hidden bg-black p-8 md:p-12 flex flex-col justify-end min-h-100 lg:min-h-150 border border-black/10">
             <div 
               className="absolute inset-0 bg-cover bg-center opacity-70"
               style={{ backgroundImage: 'url("https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?auto=format&fit=crop&w=1200&q=80")' }}
             />
-            <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/40 to-transparent"></div>
+            <div className="absolute inset-0 bg-linear-to-t from-black/90 via-black/40 to-transparent"></div>
             
             <div className="relative z-10">
               <span className="inline-block px-4 py-2 bg-white/10 backdrop-blur-md rounded-full text-white/90 font-bold text-sm tracking-wide mb-4 border border-white/20">
@@ -83,24 +83,24 @@ export default function ContactForm() {
 
         {/* Bottom Small Info Bento */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-          <div className="bg-gray-50 rounded-[1.5rem] p-6 flex flex-col items-center justify-center text-center gap-3 border border-black/5 hover:bg-gray-100 transition-colors">
+          <div className="bg-gray-50 rounded-3xl p-6 flex flex-col items-center justify-center text-center gap-3 border border-black/5 hover:bg-gray-100 transition-colors">
             <div className="w-12 h-12 bg-white rounded-full flex items-center justify-center shadow-sm text-[#e58a43]">
               <MapPin size={24} />
             </div>
-            <p className="text-gray-900 font-semibold text-[15px]">Plot No. 103, Laxmi Narayan Ln, Opp. Rambaug Hall, Matunga, Mumbai 400019</p>
+            <p className="text-gray-900 font-black text-[15px]">Plot No. 103, Laxmi Narayan Ln, Opp. Rambaug Hall, Matunga, Mumbai 400019</p>
           </div>
-          <div className="bg-gray-50 rounded-[1.5rem] p-6 flex flex-col items-center justify-center text-center gap-3 border border-black/5 hover:bg-gray-100 transition-colors">
+          <div className="bg-gray-50 rounded-3xl p-6 flex flex-col items-center justify-center text-center gap-3 border border-black/5 hover:bg-gray-100 transition-colors">
             <div className="w-12 h-12 bg-white rounded-full flex items-center justify-center shadow-sm text-[#e58a43]">
               <Phone size={24} />
             </div>
-            <p className="text-gray-900 font-black text-2xl tracking-tighter">(+91) 9892134834</p>
+            <p className="text-gray-900 font-black text-[15px] tracking-tighter">(+91) 9892134834</p>
           </div>
-          <div className="bg-gray-50 rounded-[1.5rem] p-6 flex flex-col items-center justify-center text-center gap-3 border border-black/5 hover:bg-gray-100 transition-colors">
+          <div className="bg-gray-50 rounded-3xl p-6 flex flex-col items-center justify-center text-center gap-3 border border-black/5 hover:bg-gray-100 transition-colors">
             <div className="w-12 h-12 bg-white rounded-full flex items-center justify-center shadow-sm text-[#e58a43]">
               <Clock size={24} />
             </div>
-            <p className="text-gray-900 font-black text-2xl tracking-tighter">24/7 Hours</p>
-            <span className="text-gray-500 font-semibold text-sm uppercase">Service Available</span>
+            <p className="text-gray-900 font-black text-[15px]">24/7 Hours</p>
+            <span className="text-gray-900 font-black text-[15px] uppercase">Service Available</span>
           </div>
         </div>
 

@@ -60,8 +60,6 @@ export default function Footer() {
 
           {/* Navigation Links */}
           <div className="flex flex-wrap justify-center items-center gap-6 md:gap-10 text-[14px] md:text-[16px] font-bold tracking-tight text-white pb-6 md:pb-2">
-            <Link to="/" className="text-white hover:text-[#e58a43] transition-colors">Privacy Policy</Link>
-            <Link to="/" className="text-white hover:text-[#e58a43] transition-colors">Terms</Link>
             <Link to="/" className="text-[#e58a43] hover:text-[#d67b38] transition-colors">Homepage</Link>
             <Link to="/about" className="text-white hover:text-[#e58a43] transition-colors">About Us</Link>
             <Link to="/services" className="text-white hover:text-[#e58a43] transition-colors">Services</Link>
